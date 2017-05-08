@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Sunny Summer</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
+  <style>
+    body {
+      background: saddlebrown;
+      font-family: 'Josefin Slab', Verdana;
+      text-align: center;
+      color: goldenrod;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    
+    .white {
+      background: burlywood;
+    }
+    
+    #title {
+      text-align: center;
+      font-size: 50px;
+      color: darkorange;
+      font-weight: bold;
+    }
+  </style>
+
+  <base target="_blank">
+</head>
+
+<body>
+  <div class="white">
+    <h1 id="title"> Sunny Summer </h1>
+    <p>A javascript takeover for the warm sunshine. (Warning this will takeover any website, but it will not harm it.) To activate just drag the image below into you bookmarks bar and click on it when you are on the target website.</p>
+    <a href="#" id="bookmarklet">
+      <img width="400" src="http://www.desi88.com/wp-content/uploads/2014/11/Sun-summer-clip-art.jpg" alt="Sunny Summer">
+    </a>
+  </div>
+  <br>
+  <footer>This was made possible by MTechGeek's design of <a href="https://thimble.webmaker.org/en-US/project/130629/edit">HEY RAINBOWS</a> so please go check that out as well
+  </footer>
+  <script id="bookmarklet-code">
+    var elements = document.getElementsByTagName("*");
+
+    function whattorep(time) {
+      var r = "hsl(" + (Math.sin(time / 300) * 35 + 35) + ", 100%, 50%)";
+      for (var i = 0; i < elements.length; i++) elements[i].style.color = r;
+      window.requestAnimationFrame(whattorep);
+    }
+
+    function sound() {
+      var audio = document.createElement('audio');
+      audio.loop = "loop";
+      audio.id = "audio";
+      var source = document.createElement('source');
+      source.src = 'http://soundbible.com/grab.php?id=1519&type=mp3';
+      audio.appendChild(source);
+      var script = document.createElement('script');
+      script.innerText = "document.getElementById('audio').play();";
+      document.body.appendChild(audio);
+      document.body.appendChild(script);
+    }
+
+    function runBookmarklet() {
+      var img = document.getElementsByTagName("img");
+      var length = img.length;
+      for (var i = 0; i < length; i++) {
+        img[i].src = "http://media.giphy.com/media/10d3NDzD40xb0s/giphy.gif";
+      }
+      window.requestAnimationFrame(whattorep);
+      sound();
+    }
+  </script>
+  <script>
+    var code = document.getElementById("bookmarklet-code").textContent;
+    var bookmarklet = document.getElementById("bookmarklet");
+    code = "(function() {" + code + "; runBookmarklet(); })();";
+    bookmarklet.setAttribute("href", "javascript:" + encodeURIComponent(code));
+  </script>
+  <script>
+  </script>
+</body>
+
+</html>

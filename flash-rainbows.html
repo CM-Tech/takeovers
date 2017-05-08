@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Flash Rainbows: Javascript Takeover</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+  <style>
+    body {
+      background: lightgray;
+      text-align: center;
+      font-family: 'Poiret One', Verdana;
+      font-size: 28px;
+      color: #E01F66;
+    }
+    
+    img {
+      max-width: 100%;
+    }
+    
+    article {
+      background-color: #fff;
+      padding: 20px;
+      min-width: 250px;
+      max-width: 800px;
+      margin: 70px auto 30px;
+      border: 1px white solid;
+    }
+    
+    h1 {
+      font-family: 'Poiret One', 'oswald', sans-serif;
+      font-weight: 500;
+      color: #E01F66;
+      line-height: 1em;
+      font-size: 4rem;
+    }
+    
+    small {
+      font-family: 'Poiret One', 'oswald', sans-serif;
+      font-weight: 200;
+      font-size: 0.8em;
+      color: lightgray;
+      display: block;
+      text-shadow: none;
+    }
+    
+    footer {
+      text-align: center;
+      font-family: 'Poiret One', Verdana;
+      font-size: 20px;
+      color: #666666;
+    }
+  </style>
+
+  <base target="_blank">
+</head>
+
+<body>
+  <article>
+    <center>
+      <h1>FLASH RAINBOWS <small>JAVASCRIPT TAKEOVER</small></h1>
+    </center>
+
+    <center>
+      <p>Drag the image below into your bookmarks, then go to any website and click it to replace all (most) of the images with rainbows, and do something entirely unexpected with most of the text.</p>
+    </center>
+
+    <center>
+      <a href='#' id="bookmarklet"><img width="400" alt="Flash Rainbows" src="http://images.clipartpanda.com/rainbow-clip-art-rainbow.gif"></a>
+    </center>
+
+    <center>
+      <p>In case this page isn't flashing click the rainbow.</p>
+    </center>
+  </article>
+
+  <center>
+    <footer>The bookmarklet is a hack of the <a href="http://heygirl.io/">"Hey Girl"</a> Ryan Gosling javascript bookmark thinger. Givin' credit where she's due.</footer>
+  </center>
+
+  <script id="bookmarklet-code">
+    var elements = document.getElementsByTagName("*");
+
+    function random_color() {
+      return "hsl(" + Math.random() * 360 + ", 100%, 50%)";
+    }
+
+    function whattorep() {
+      for (var i = 0; i < elements.length; i++) elements[i].style.color = random_color();
+    }
+
+    function sound() {
+      var audio = document.createElement('audio');
+      audio.loop = "loop";
+      audio.id = "audio";
+      var source = document.createElement('source');
+      source.src = 'https://soundbible.com/grab.php?id=1795&type=mp3';
+      audio.appendChild(source);
+      var script = document.createElement('script');
+      script.innerText = "document.getElementById('audio').play();";
+      document.body.appendChild(audio);
+      document.body.appendChild(script);
+    }
+
+    function runBookmarklet(target) {
+      var images = (target || document).getElementsByTagName("img");
+      for (var i = 0; i < images.length; i++) {
+        images[i].srcset = "https://orig03.deviantart.net/2328/f/2012/083/8/9/rainbow_octagon_spin_ripple_by_10binary-d4tsfwt.gif";
+      }
+      window.setInterval(whattorep, 50);
+      sound();
+    }
+  </script>
+
+  <script>
+    var bookmarklet = document.getElementById("bookmarklet");
+    var code = document.getElementById("bookmarklet-code").textContent;
+
+    code = "(function() { " + code + "; runBookmarklet(); })();";
+    bookmarklet.setAttribute("href", "javascript:" + encodeURIComponent(code));
+  </script>
+
+</body>
+
+</html>

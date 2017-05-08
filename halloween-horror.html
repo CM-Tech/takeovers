@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Halloween Horror</title>
+
+  <link href='http://dl.dafont.com/dl/?f=deathrattle_bb' rel='stylesheet' type='text/css'>
+  <style>
+    #return {
+      font-size: 50px;
+    }
+    
+    body {
+      background: black;
+      font-family: 'deathrattlebb', Verdana;
+      text-align: center;
+      color: orange;
+      font-size: 20px;
+    }
+    
+    .white {
+      background: black;
+    }
+    
+    #title {
+      text-align: center;
+      font-size: 50px;
+      color: orange;
+      font-weight: bold;
+    }
+    
+    a {
+      color: yellow;
+    }
+    
+    ul {
+      text-align: left;
+    }
+  </style>
+
+  <base target="_blank">
+</head>
+
+<body>
+  <article class="white">
+
+    <h1 id="title">Halloween Horror</h1>
+    <p>A javascript takeover for your halloween needs. (Warning this will take over any website, but it will not harm it.) To activate just drag the image below into you bookmarks bar and click on it when you are on the target website. Sound may not work
+      on some of the devices</p>
+    <a href="#" id="bookmarklet">
+      <img width="400" src="https://cdn.evbuc.com/eventlogos/5162000/eyes.gif" alt="Halloween Horror">
+    </a>
+  </article>
+  <br>
+  <footer>This was made possible by MTechGeek's design of <a href="https://thimble.webmaker.org/en-US/project/130629/edit">HEY RAINBOWS</a> so please go check that out as well
+  </footer>
+  <p>Includes</p>
+  <ul>
+    <li>2 possible images</li>
+    <li>halloween themed song</li>
+    <li>Crazy background</li>
+    <li>Flashing text</li>
+  </ul>
+  <script id="bookmarklet-code">
+    var elements = document.getElementsByTagName("*");
+
+    var imgs = ["http://parkslopefifthavenuebid.com/sites/parkslopefifthavenuebid.com/files/node_image/pumpkin.png", "http://www.freelargeimages.com/wp-content/uploads/2014/11/Cute_halloween_clipart-9.png"];
+    var colors = ["orange", "black"];
+    var wc = 0;
+
+    function whattorep() {
+      var thecolor = colors[wc % colors.length];
+
+      for (var i = 0; i < elements.length; i++) {
+        var ce = elements[i];
+
+        ce.style.color = thecolor;
+        ce.style.background = "";
+        ce.style.fontFamily = "'deathrattlebb'";
+        ce.style.background = "none";
+      }
+
+      document.body.style.backgroundImage = "url('https://libcom.org/files/images/blog/drippingblood-1.png')";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundSize = "100%";
+      document.body.style.backgroundColor = "black";
+
+      wc++;
+    }
+
+    function sound() {
+      var audio = document.createElement('audio');
+      audio.loop = "loop";
+      audio.id = "audio";
+      var source = document.createElement('source');
+      source.src = 'https://s9.hdconverter.co/new/dl/bejKhiiMeejgj/download';
+      audio.appendChild(source);
+      var script = document.createElement('script');
+      script.innerText = "document.getElementById('audio').play();";
+      document.body.appendChild(audio);
+      document.body.appendChild(script);
+    }
+
+    function font() {
+      var newStyle = document.createElement('style');
+      var FontName = 'deathrattlebb';
+      var FontURL = 'http://dl.dafont.com/dl/?f=deathrattle_bb';
+      newStyle.appendChild(document.createTextNode("@font-face {" + "font-family: '" + FontName + "';" + "src: url('" + FontURL + "');" + "}"));
+
+      document.head.appendChild(newStyle);
+    }
+
+    function runBookmarklet() {
+      var img = document.getElementsByTagName("img");
+      for (var i = 0; i < img.length; i++) {
+        img[i].srcset = imgs[Math.floor(Math.random() * imgs.length)];
+      }
+      window.setInterval(whattorep, 10);
+      sound();
+    }
+  </script>
+  <script>
+    var code = document.getElementById("bookmarklet-code").textContent;
+    var bookmarklet = document.getElementById("bookmarklet");
+    code = "(function() {" + code + "; runBookmarklet(); })();";
+    bookmarklet.setAttribute("href", "javascript:" + encodeURIComponent(code));
+  </script>
+</body>
+
+</html>

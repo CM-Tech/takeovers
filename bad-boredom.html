@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Bad Boredom</title>
+
+  <link href="http://www.myfontsfree.com/data/20/c/classroom_boredom/classboreddom-JL.ttf" rel='stylesheet' type='text/css'>
+  <style>
+    @font-face {
+      font-family: "Classroom Boredom";
+      src: url("http://www.myfontsfree.com/data/20/c/classroom_boredom/classboreddom-JL.ttf");
+    }
+    
+    #return {
+      font-size: 50px;
+    }
+    
+    body {
+      background: #bdbdbd;
+      font-family: 'Classroom Boredom', Verdana;
+      text-align: center;
+      color: lightslategray;
+      font-size: 20px;
+    }
+    
+    article {
+      background-color: #fff;
+      padding: 20px;
+      min-width: 250px;
+      max-width: 800px;
+      margin: 70px auto 30px;
+      border: 1px white solid;
+    }
+    
+    #title {
+      text-align: center;
+      font-size: 50px;
+      color: lightgray;
+      font-weight: bold;
+    }
+    
+    a {
+      color: gray;
+    }
+    
+    ul {
+      text-align: left;
+    }
+  </style>
+
+  <base target="_blank">
+</head>
+
+<body>
+  <article class="white">
+    <h1 id="title">Bad Boredom</h1>
+    <p>A javascript takeover to represent your boredom. (Warning this will take over any website, but it will not harm it.) To activate just drag the image below into your bookmarks bar and click on it when you are on the target website. Sound may not work
+      on some of the devices</p>
+    <p>Includes</p>
+    <ul>
+      <li>3 possible images</li>
+      <li><i>Boring</i> themed song</li>
+      <li>Twiddly background</li>
+      <li>Gray text</li>
+    </ul>
+
+    <a href="#" id="bookmarklet"><img width="400" src="http://i105.photobucket.com/albums/m239/iwan207/Smiley/200D4.gif" alt="Bad Boredom"></a>
+
+  </article>
+  <br>
+  <footer>This was made possible by MTechGeek's design of <a href="https://thimble.webmaker.org/en-US/project/130629/edit">HEY RAINBOWS</a> so please go check that out as well</footer>
+
+  <script id="bookmarklet-code">
+    var elements = document.getElementsByTagName("*");
+
+    var colors = ["lightgray", "black", "gray"];
+    var imgs = ["http://www.ct4me.net/images/dmbtest.gif", "https://static.comicvine.com/uploads/original/14/146898/2788456-unsure_smiley_face_hi.png", "http://i105.photobucket.com/albums/m239/iwan207/Smiley/200D4.gif"];
+    var wc = 0;
+
+    function whattorep() {
+
+      var thecolor = colors[wc - 1];
+      wc++;
+
+      for (var i = 0; i < elements.length; i++) {
+        var ce = elements[i];
+        ce.style.color = thecolor;
+        ce.style.fontFamily = "'Classroom Boredom'";
+        ce.style.background = "none";
+      }
+      document.body.style.backgroundColor = "#bdbdbd";
+      document.body.style.backgroundImage = "url('http://cliparts.co/cliparts/pTo/5k8/pTo5k87gc.gif')";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundSize = "100%";
+    }
+
+    function sound() {
+      var audio = document.createElement('audio');
+      audio.loop = "loop";
+      audio.id = "audio";
+      var source = document.createElement('source');
+      source.src = 'http://s8.hdconverter.co/new/dl/bejKgOefeiNhb/download';
+      audio.appendChild(source);
+      var script = document.createElement('script');
+      script.innerText = "document.getElementById('audio').play();";
+      document.body.appendChild(audio);
+      document.body.appendChild(script);
+    }
+
+    function font() {
+      var newStyle = document.createElement('style');
+      var fontName = 'Classroom Boredom';
+      var fontURL = 'http://www.myfontfree.com/data/20/c/classroom_boredom/classboreddom-JL.ttf';
+      newStyle.appendChild(document.createTextNode("\
+        @font-face {\
+        font-family: '" + fontName + "';\
+        src: url('" + fontURL + "');\
+        }\
+        "));
+
+      document.head.appendChild(newStyle);
+    }
+
+    function runBookmarklet() {
+      var img = document.getElementsByTagName("img");
+      var length = img.length;
+      for (var i = 0; i < length; i++) {
+        img[i].srcset = imgs[Math.floor(Math.random() * imgs.length)];
+      }
+      window.setInterval(whattorep, 2500);
+      sound();
+      font();
+    }
+  </script>
+  <script>
+    var code = document.getElementById("bookmarklet-code").textContent;
+    var bookmarklet = document.getElementById("bookmarklet");
+
+    code = "(function() {" + code + "; runBookmarklet(); })();";
+    bookmarklet.setAttribute("href", "javascript:" + encodeURIComponent(code));
+  </script>
+</body>
+
+</html>
